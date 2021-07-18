@@ -1,0 +1,26 @@
+{
+  "posts": [
+    {
+      "username": "da12",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "username": "张三",
+      "password": "123123",
+      "id": 3
+    },
+    {
+      "{name:\"张三\"}": "",
+      "id": 4
+    },
+    {
+      "{\n\t“name”:\"李四\"\n}": "",
+      "id": 5
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}

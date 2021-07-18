@@ -1,3 +1,3 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow:       //默认是所有引擎都可以访问这个文件
