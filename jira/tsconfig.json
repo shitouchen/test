@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "src/screens/project-list/search-panel., "__json_server_mock__/middleware.js"tsx"  ]
+    "src",
+"src/screens/project-list/search-panel.,",
+"tsx"  
+]
 }
