@@ -68,3 +68,52 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```javascript
+import React, {useState, useEffect} from 'react'
+
+const Example = () => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        document.title = 'you clicked $(count)';
+    })
+
+    return (
+        <div>
+            <p>you clicked {count}</p>
+            <button onClick={()=>setCount(count + 1)}>Click me</button>
+        </div>
+    )
+}
+
+
+import React, {useState, useEffect} from 'react';
+
+const Example = () => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            setCount(c => c+1)
+        }, 1000)
+        return () => clearInterval(id)
+    }, [])
+    return <h1>H</h1>
+}
+
+import React, {useState} from 'react'
+
+const App = () => {
+    const [data, setData] = useState({hits: []});
+    return (
+        <ul>
+        {data.hits.(item => (
+            <li key={item.objectID}>
+            <a href={item.url}>{item.title}</a>
+        ))}
+        </ul>
+    )
+}
+export default App
+```
