@@ -11,3 +11,16 @@ html {
 html body #root .App{
   min-height: 100vh;
 }
+
+.example {
+  /* margin: 20px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  text-align: center; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}

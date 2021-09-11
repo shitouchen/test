@@ -12,10 +12,11 @@ export interface  User {
 const { Option } = Select;
 interface SearchPanelProps {
     users: User[],
-    param: {
+     param: {
         name: string;
         personId: string
     },
+    // param:Partial<Pick<Project, 'name' | 'personId'>>;
     setParam: (param: SearchPanelProps['param']) => void;
 }
 export const SearchPanel = ({users, param, setParam}:SearchPanelProps) => {

@@ -1,4 +1,4 @@
-import  {useEffect, useState} from "react"
+import  {useEffect, useState, useRef} from "react"
 export const isFalsy = (value: any) => value === 0 ? false : !value
 export const isVoid = (value: unknown) => value === undefined || value === null || value === ''
 
@@ -35,3 +35,35 @@ export const useDebounce = <V>(value: V, delay?: number):any => {
     }, [value, delay])
     return debounceValue
 }
+
+export const useDocumentTitle = (title: string, keepOnUnmount: boolean = true) => {
+    const oldTitle = useRef(document.title).current;
+    // useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。
+    // 返回的 ref 对象在组件的整个生命周期内持续存在。
+    // const oldTitle = document.title;
+    // 页面加载时：oldTitle === 旧title 'React App'
+    // 加载后：oldTitle === 新title
+    useEffect(()=>{
+        document.title = title;
+    },[title])
+
+    // useEffect(() => {
+    //     return () => {
+    //         if(!keepOnUnmount){
+    //             // 如果不指定依赖，读到的就是旧title
+    //             document.title = oldTitle;
+    //         }
+    //     }
+    // },[]) // 当监听的状态为空时，会有提示，防止进入闭包的坑
+
+    //对keepOnUnmount 和 title 的状态进行监听，使用useRef
+    useEffect(() => {
+        return () => {
+            if(!keepOnUnmount){
+                document.title = oldTitle
+            }
+        }
+    }, [keepOnUnmount,oldTitle])
+}
+
+export const resetRoute = () => window.location.href = window.location.origin

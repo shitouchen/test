@@ -1,8 +1,10 @@
 
 import './App.css';
 import { AuthenticatedApp } from './authenticated-app';
+import { FullPageErrorFallback } from './context';
 import { useAuth } from './context/auth-context';
 import { UnauthenticatedApp } from './screens/unauthenticated-app';
+import {ErrorBoundary} from './components/error-boundary';
 
 
 
@@ -10,8 +12,9 @@ function App() {
   const {user} = useAuth()
   return (
     <div className="App">
+      <ErrorBoundary fallbackRender={FullPageErrorFallback}>
       {user ? <AuthenticatedApp/> : <UnauthenticatedApp/>}
-      
+      </ErrorBoundary>    
     </div>
   );
 }

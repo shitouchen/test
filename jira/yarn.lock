@@ -1853,6 +1853,11 @@
   resolved "https://registry.nlark.com/@types/cookie/download/@types/cookie-0.4.1.tgz#bfd02c1f2224567676c1545199f87c3a861d878d"
   integrity sha1-v9AsHyIkVnZ2wVRRmfh8OoYdh40=
 
+"@types/core-js@^2.5.5":
+  version "2.5.5"
+  resolved "https://registry.nlark.com/@types/core-js/download/@types/core-js-2.5.5.tgz?cache=0&sync_timestamp=1629707043159&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fcore-js%2Fdownload%2F%40types%2Fcore-js-2.5.5.tgz#dc5a013ee0b23bd5ac126403854fadabb4f24f75"
+  integrity sha1-3FoBPuCyO9WsEmQDhU+tq7TyT3U=
+
 "@types/eslint@^7.2.6":
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-7.2.6.tgz#5e9aff555a975596c03a98b59ecd103decc70c3c"
@@ -1938,10 +1943,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.31.tgz#72286bd33d137aa0d152d47ec7c1762563d34055"
   integrity sha512-vFHy/ezP5qI0rFgJ7aQnjDXwAMrG0KqqIH7tQG5PPv3BWBayOPIQNBjVc/P6hhdZfMx51REc6tfDNXHUio893g==
 
-"@types/node@^16.3.3":
-  version "16.4.9"
-  resolved "https://registry.nlark.com/@types/node/download/@types/node-16.4.9.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-16.4.9.tgz#04eb3da65d08ea377f5e682bf0d22dc1f5e7f19e"
-  integrity sha1-BOs9pl0I6jd/Xmgr8NItwfXn8Z4=
+"@types/node@^16.7.1":
+  version "16.7.1"
+  resolved "https://registry.nlark.com/@types/node/download/@types/node-16.7.1.tgz?cache=0&sync_timestamp=1629504256009&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-16.7.1.tgz#c6b9198178da504dfca1fd0be9b2e1002f1586f0"
+  integrity sha1-xrkZgXjaUE38of0L6bLhAC8VhvA=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -10307,6 +10312,15 @@ react-query@^2.26.3:
   dependencies:
     "@babel/runtime" "^7.5.5"
 
+react-query@^3.19.6:
+  version "3.21.0"
+  resolved "https://registry.nlark.com/react-query/download/react-query-3.21.0.tgz#2e099a7906c38eeeb750e8b9b12121a21fa8d9ef"
+  integrity sha1-LgmaeQbDju63UOi5sSEhoh+o2e8=
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    broadcast-channel "^3.4.1"
+    match-sorter "^6.0.2"
+
 react-query@^3.5.10:
   version "3.19.6"
   resolved "https://registry.nlark.com/react-query/download/react-query-3.19.6.tgz#02bda891a3f0a0534934d9024350d655b268e82c"
@@ -10320,6 +10334,26 @@ react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
+
+react-router-dom@^6.0.0-beta.0:
+  version "6.0.0-beta.0"
+  resolved "https://registry.nlark.com/react-router-dom/download/react-router-dom-6.0.0-beta.0.tgz#9dcc8555365f22f7fbd09f26b6b82543f3eb97d6"
+  integrity sha1-ncyFVTZfIvf70J8mtrglQ/Prl9Y=
+  dependencies:
+    prop-types "^15.7.2"
+    react-router "6.0.0-beta.0"
+
+react-router@6.0.0-beta.0:
+  version "6.0.0-beta.0"
+  resolved "https://registry.nlark.com/react-router/download/react-router-6.0.0-beta.0.tgz#3e11f39b6ded4412c2fed9e4f989dd4c8156724d"
+  integrity sha1-PhHzm23tRBLC/tnk+YndTIFWck0=
+  dependencies:
+    prop-types "^15.7.2"
+
+react-router@^6.0.0-beta.2:
+  version "6.0.0-beta.2"
+  resolved "https://registry.nlark.com/react-router/download/react-router-6.0.0-beta.2.tgz#7c804e4d1f86ebfd397ed8b1e05a63d24bf3313f"
+  integrity sha1-fIBOTR+G6/05ftix4Fpj0kvzMT8=
 
 react-scripts@4.0.3:
   version "4.0.3"

@@ -7,12 +7,19 @@ import {  Form, Input } from 'antd';
 
 import { LongButton } from '.';
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({onError}:{onError:(error:Error) => void}) => {
     const {register} = useAuth()
-    const handleSubmit = (values: {username:string, password:string}) => {
+    const handleSubmit = async ({cpassword, ...values}: {username:string, password:string, cpassword:string}) => {
+        if(cpassword !== values.password){
+            onError(new Error('请确认两次输入的密码相同'))
+            return
+        }
         // 阻止默认的点击事件执行
-       
-        register(values)
+       try{
+        await register(values);
+       }catch(e){
+            onError(e);
+       }
     } 
     return <Form onFinish={handleSubmit}>
         <Form.Item
@@ -26,6 +33,13 @@ export const RegisterScreen = () => {
             label='密码'
             name='password'
             rules={[{required:true, message:'请输入密码'}]}
+        >
+            <Input.Password />
+        </Form.Item>
+        <Form.Item
+            label='请确认密码'
+            name='cpassword'
+            rules={[{required:true, message:'请确认密码'}]}
         >
             <Input.Password />
         </Form.Item>
