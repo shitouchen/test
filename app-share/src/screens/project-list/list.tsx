@@ -15,13 +15,14 @@ export interface Project {
     created: number
 }
 interface ListProps extends TableProps<Project> {
-    users: User[] 
+    users: User[];
+    refersh?:() => void 
 }
 // type PropsType = Omit<ListProps, 'users'>
 export const List = ({users, ...props}: ListProps) => {
     const {mutate} = useEditPropject()
     // const pinProject = (id: string, pin: boolean) => mutate({id, pin}) 柯里化
-    const pinProject = (id: string) => (pin: boolean) => mutate({id, pin}) // 先消化id，再消化pin
+    const pinProject = (id: string) => (pin: boolean) => mutate({id, pin}).then(props.refersh) // 先消化id，再消化pin
     return   <Table pagination={false} columns={
         [
             {

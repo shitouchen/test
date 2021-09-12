@@ -117,3 +117,22 @@ const App = () => {
 }
 export default App
 ```
+
+使用useEffect时，依赖项里加上callback会造成无限循环
+```javascript
+    export const useMount = (callback: () => void) => {
+        useEffect(() => {
+            callback();
+            // TODO 依赖项里加上callback会造成无限循环，这个和useCallback以及useMemo有关系
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [])
+    }
+```
+
+## 常见几种错误的现象和解决方法
+### 错误一：useEffect在一个页面还在刷新时，退出当前的页面，就会出现此种错误；异步操作的错误，例如当页面需要执行三秒，在执行两秒的时候，退出页面，但是异步 return 还在执行，
+### 执行过程中已经找不到data；
+    ```javascript
+        Warning: can't perform a React state undate on an unmounted component. This is a no-op,but it indicates a memory leak 
+        in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+    ```
