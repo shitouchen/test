@@ -17,7 +17,7 @@ import { stringify } from "querystring";
 export const ProjectListScreen = () => {
     const [ param, setParam] = useState({
         name: '',
-        personId: 'number || undefined'
+        personId: ''
     });
 
     // const [param, setParam] = useUrlQueryParam(['name','personId']);
