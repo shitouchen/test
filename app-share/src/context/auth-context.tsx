@@ -45,7 +45,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     });
 
     if(isIdle || isLoading){
-        return <p className='example'><Spin /></p>
+        return <div className='example'><Spin/></div>
     }
 
     if (isError) {

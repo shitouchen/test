@@ -136,3 +136,53 @@ export default App
         Warning: can't perform a React state undate on an unmounted component. This is a no-op,but it indicates a memory leak 
         in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
     ```
+
+```javascript
+
+    import React from 'react';
+
+    const defaultContextValue = {
+        username: 'chenlei',
+    }
+
+    export const appContext = React.createContext(defaultContextValue)
+
+    export const AppStateProvider = (props) => {
+        const [state, setState] = useState(defaultContextValue)
+
+        return (
+            <appContext.Provider value={state}>
+                {props.children}
+            </appContext.Provider>
+        )
+    }
+
+    // 在另一个组件中引入username
+    import React,{useContext} from 'antd';
+    import { appContext } from '../index';
+    const contextText = () => {
+        return (
+            <appContext.Consumer>
+                {(value)=>{
+                    return <div>
+                        <p>{value.username}</p>
+                    </div>
+                }     
+                }
+            </appContext.Consumer>
+        )
+    }
+
+    // 在另一个组件中引入username
+    import React,{useContext} from 'antd';
+    import { appContext } from '../index';
+    const contextText = () => {
+        const value = useContext(appContext);
+        return (
+            <div>
+                <p>{value.username}</p>
+            </div>         
+        )
+    }
+
+```

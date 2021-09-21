@@ -1,4 +1,5 @@
 import qs from 'qs';
+import { useCallback } from 'react';
 import * as auth from '../auth-provider';
 import { useAuth } from '../context/auth-context';
 
@@ -41,5 +42,5 @@ export const http = async (endpoint: string, {data, token, headers, ...customCon
 // TS Utility Types的用法：用泛型给它传入一个其他类型，然后utility type对这个类型进行某种操作
 export const useHttp = () => {
     const {user} = useAuth()
-    return (...[endpoint, config]: Parameters<typeof http>) => http(endpoint, {...config, token: user?.token})
+    return useCallback((...[endpoint, config]: Parameters<typeof http>) => http(endpoint, {...config, token: user?.token}),[user?.token])
 }

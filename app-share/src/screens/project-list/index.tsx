@@ -5,7 +5,7 @@ import { SearchPanel } from "./search-panel";
 import { useMount, useDebounce, useDocumentTitle} from "../../utils/index";
 // import { useHttp } from "../../utils/http";
 import styled from "@emotion/styled";
-import {Typography} from 'antd';
+import {Row, Typography, Button} from 'antd';
 import { useProjects } from "../../utils/project";
 import { useUsers } from "../../utils/users";
 import { useUrlQueryParam } from "../../utils/url";
@@ -14,7 +14,7 @@ import { stringify } from "querystring";
 
 // const apiUrl = process.env.REACT_APP_API_URL
 
-export const ProjectListScreen = () => {
+export const ProjectListScreen = (props:{setProjectOpen: (isOpen:boolean)=>void}) => {
     const [ param, setParam] = useState({
         name: '',
         personId: ''
@@ -32,10 +32,18 @@ export const ProjectListScreen = () => {
     useDocumentTitle('项目列表',false);
     
     return  <Container>
+        <Row>
         <h2>项目列表</h2>
+        <Button onClick={ () => props.setProjectOpen(true)}>创建项目</Button>
+        </Row>
         <SearchPanel users={users || []} param={param} setParam={setParam} />
         {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : ''}
-        <List refersh={retry} loading={isLoading} dataSource={list || []} users={users || []} />
+        <List 
+        refersh={retry} 
+        loading={isLoading}
+        dataSource={list || []} 
+        users={users || []} 
+        setProjectOpen={props.setProjectOpen} />
     </Container>
 }
 

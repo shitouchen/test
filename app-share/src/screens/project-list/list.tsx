@@ -1,10 +1,11 @@
 import React from 'react';
 import { User } from './search-panel';
-import {Table, TableProps} from 'antd';
+import {Dropdown, Table, TableProps, Button,} from 'antd';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import {Pin} from '../../components/pin';
 import { useEditPropject } from '../../utils/project';
+import Menu from 'rc-menu/lib/Menu';
 
 export interface Project {
     id: string,
@@ -12,11 +13,12 @@ export interface Project {
     personId: string,
     pin:boolean;
     organization: string
-    created: number
+    created: number,
 }
 interface ListProps extends TableProps<Project> {
     users: User[];
-    refersh?:() => void 
+    refersh?:() => void;   
+    setProjectOpen: (isOpen:boolean)=>void; 
 }
 // type PropsType = Omit<ListProps, 'users'>
 export const List = ({users, ...props}: ListProps) => {
@@ -39,31 +41,44 @@ export const List = ({users, ...props}: ListProps) => {
                 }   
             },
             {
+            key: 'name',
             title:'名称',
-            // dataIndex:'name',
+            dataIndex:'name',
             sorter:(a,b) => a.name.localeCompare(b.name),
             render (value, project) {
                 return <Link to={String(project.id)}>{project.name}</Link>
             }
         },
         {
+            key:'organization',
             title:'部门',
             dataIndex:'organization',
         },
         {
+            key:'user.name',
             title:'负责人',
             render(value, project) {
                 return <span>
-                    {users.find(user => user.id === project.personId)?.name || '未知'}
+                    {users.find(user => user.id === project.personId)?.name || '未知' }
                 </span>
             }
         },
         {
+            key:'project.created',
             title: '创建时间',
             render(value, project){
                 return <span>
                     {project.created ? dayjs(project.created).format('YYYY-MM-DD') : ''}
                 </span>
+            }
+        },
+        {
+            render(value, project){
+                return <Dropdown overlay={<Menu>
+                        <Button type={'link'} onClick={()=> props.setProjectOpen(true)}>编辑</Button>
+                </Menu>}>
+                    <Button type={'link'}>...</Button>
+                </Dropdown>
             }
         }
     ]

@@ -18,7 +18,8 @@ export const RegisterScreen = ({onError}:{onError:(error:Error) => void}) => {
        try{
         await register(values);
        }catch(e){
-            onError(e);
+            // onError(e);
+            console.log(e);
        }
     } 
     return <Form onFinish={handleSubmit}>

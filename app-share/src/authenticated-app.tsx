@@ -8,6 +8,8 @@ import {Navigate, Route,  Routes} from 'react-router';
 import {BrowserRouter } from 'react-router-dom';
 import { ProjectScreen } from "./screens/project";
 import { resetRoute } from "./utils";
+import {ProjectModal} from '../src/screens/project-list/project-modal';
+import { ProjectPopover } from "./components/project-popover";
 
 /**
  * grid 和 flex 各自的应用场景
@@ -23,35 +25,44 @@ import { resetRoute } from "./utils";
  */
 
 export const AuthenticatedApp = () => {
+    const [projectOpen, setProjectOpen] = React.useState(false);
     return (
     <Container>
-        <PageHeader/>
+        <PageHeader setProjectOpen={setProjectOpen}/>
         <Main>
             {/* <ProjectListScreen /> */}
             <BrowserRouter>
             <Routes>
-                <Route path={"/projects"} element={<ProjectListScreen />} />
+                <Route path={"/projects"} element={<ProjectListScreen setProjectOpen={setProjectOpen} />} />
                 <Route path={'/projects/:projectId/*'} element={<ProjectScreen />}></Route>
                 <Navigate to={'/projects'}/>
             </Routes>
             </BrowserRouter>   
             </Main>
+            <ProjectModal projectModalOpen={projectOpen} onClose={() => setProjectOpen(false)}></ProjectModal>
     </Container>          
     );
 };
 
-const PageHeader = () => {
-    const {logout, user} = useAuth();
+const PageHeader = (props:{setProjectOpen: (isOpen:boolean)=>void}) => {
     return <Header>
     <HeaderLeft>
-        <Button type={'link'} onClick={resetRoute}>
+        <Button style={{padding:'0'}} type={'link'} onClick={resetRoute}>
         <HeaderItem>Logo</HeaderItem>
         </Button>
+        <ProjectPopover setProjectOpen={props.setProjectOpen}/>
         <HeaderItem>项目</HeaderItem>
         <HeaderItem>用户</HeaderItem>
     </HeaderLeft>
     <HeaderRight>
-        <Dropdown overlay={
+       <User/>
+    </HeaderRight>
+    </Header>
+}
+
+    const User = () => {
+        const {logout, user} = useAuth();
+        return <Dropdown overlay={
             <Menu>
                 <Menu.Item key={'logout'}>
                     <Button type={'link'} onClick={logout}>登出</Button>
@@ -62,10 +73,7 @@ const PageHeader = () => {
             Hi, {user?.name}
         </Button>
         </Dropdown>
-       
-    </HeaderRight>
-    </Header>
-}
+    }
 
 const HeaderItem = styled.h3`magin-right: 3rem`
 

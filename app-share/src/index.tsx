@@ -8,7 +8,7 @@ import { AppProvider } from './context';
 
 loadServer(() => ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
+    <AppProvider >
       <DevTools />
     <App />
     </AppProvider>

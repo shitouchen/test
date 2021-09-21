@@ -1,5 +1,5 @@
 // import { stat } from 'fs';
-import React, {useState} from 'react';
+import React, {useState,useCallback} from 'react';
 import { useMountedRef } from '.';
 
 
@@ -21,43 +21,44 @@ export const useAsync = <D>(initialState?: State<D>) => {
         ...initialState
     })
 
-    const setData = (data: D) => setState({
+    const setData = useCallback((data: D) => setState({
         data,
         stat: 'success',
         error: null
-    })
+    }),[])
 
-    const setError = (error: Error) => setState({
+    const setError = useCallback((error: Error) => setState({
         error,
         stat:'error',
         data: null
-    })
+    }),[])
     
     const mountedRef = useMountedRef();
     // useState直接传入函数的含义是：惰性初始化；所以，要用useState保存函数，不能直接传入函数
     const [retry, setRetry] = useState(()=>() => {})
 
     // run 用来触发异步请求
-    const run = (promise: Promise<D>, runConfig?: {retry: () => Promise<D>}) => {
-        if(!promise || !promise.then) {
-            throw new Error('请传入 Promise 类型数据')
-        }
-        setRetry(()=> () => {
-            if(runConfig?.retry){
-                run(runConfig?.retry(), runConfig)
+    const run = useCallback((promise: Promise<D>, runConfig?: {retry: () => Promise<D>}) => {
+            if(!promise || !promise.then) {
+                throw new Error('请传入 Promise 类型数据')
             }
-        }
-        )
-        setState({...state, stat: 'loading'})
-        return promise.then(data => {
-            if (mountedRef.current)
-            setData(data)
-            return data
-        }).catch(error => {
-            setError(error)
-            return error
-        })
-    }
+            setRetry(()=> () => {
+                if(runConfig?.retry){
+                    run(runConfig?.retry(), runConfig)
+                }
+            }
+            )
+            setState(prevState => ({...prevState, stat: 'loading'}))
+            return promise.then(data => {
+                if (mountedRef.current)
+                setData(data)
+                return data
+            }).catch(error => {
+                setError(error)
+                return error
+            })
+        },[mountedRef, setData,setError]
+    )
 
     return {
         isIdle: state.stat === 'idle',
