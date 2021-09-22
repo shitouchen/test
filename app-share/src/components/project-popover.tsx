@@ -3,8 +3,12 @@ import React from 'react';
 import { useProjects } from '../utils/project';
 
 
-export const ProjectPopover = (props:{setProjectOpen: (isOpen:boolean)=>void}) => {
-    const {setProjectOpen} = props;
+export const ProjectPopover = (props:{
+    // setProjectOpen: (isOpen:boolean)=>void
+    projectButton:JSX.Element
+}) => {
+    // const {setProjectOpen} = props;
+    // const {projectButton} = props;
     const {data: projects, isLoading} = useProjects()
     const pinnedProjects = projects?.filter(project => project.pin)
 
@@ -18,7 +22,8 @@ export const ProjectPopover = (props:{setProjectOpen: (isOpen:boolean)=>void}) =
             }
         </List>
         <Divider/>
-        <Button style={{padding:'0'}} type={'link'} onClick={() => setProjectOpen(true)}>创建项目</Button>
+        {/* <Button style={{padding:'0'}} type={'link'} onClick={() => setProjectOpen(true)}>创建项目</Button> */}
+        {props.projectButton}
     </div>
     return <Popover placement={'bottom'} content={content}>
     <span>项目</span>

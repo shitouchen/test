@@ -28,12 +28,31 @@ export const AuthenticatedApp = () => {
     const [projectOpen, setProjectOpen] = React.useState(false);
     return (
     <Container>
-        <PageHeader setProjectOpen={setProjectOpen}/>
+        <PageHeader
+        projectButton={
+            <Button 
+            style={{padding:'0'}} 
+            type={'link'} 
+            onClick={() => setProjectOpen(true)}>创建项目</Button>
+        }
+        
+        // setProjectOpen={setProjectOpen}
+        />
         <Main>
             {/* <ProjectListScreen /> */}
             <BrowserRouter>
             <Routes>
-                <Route path={"/projects"} element={<ProjectListScreen setProjectOpen={setProjectOpen} />} />
+                {/* <Route path={"/projects"} element={<ProjectListScreen 
+                    setProjectOpen={setProjectOpen} />} /> */}
+                <Route path={"/projects"} element={<ProjectListScreen 
+                projectButton={
+                    <Button 
+                    style={{padding:'0'}} 
+                    type={'link'} 
+                    onClick={() => setProjectOpen(true)}>创建项目</Button>
+             } />
+        }
+        />
                 <Route path={'/projects/:projectId/*'} element={<ProjectScreen />}></Route>
                 <Navigate to={'/projects'}/>
             </Routes>
@@ -44,13 +63,17 @@ export const AuthenticatedApp = () => {
     );
 };
 
-const PageHeader = (props:{setProjectOpen: (isOpen:boolean)=>void}) => {
+const PageHeader = 
+// (props:{setProjectOpen: (isOpen:boolean)=>void}) => {
+    (props:{projectButton:JSX.Element
+    }) => {
     return <Header>
     <HeaderLeft>
         <Button style={{padding:'0'}} type={'link'} onClick={resetRoute}>
         <HeaderItem>Logo</HeaderItem>
         </Button>
-        <ProjectPopover setProjectOpen={props.setProjectOpen}/>
+        {/* <ProjectPopover setProjectOpen={props.setProjectOpen}/> */}
+        <ProjectPopover {...props}/> 
         <HeaderItem>项目</HeaderItem>
         <HeaderItem>用户</HeaderItem>
     </HeaderLeft>

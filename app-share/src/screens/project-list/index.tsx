@@ -14,7 +14,10 @@ import { stringify } from "querystring";
 
 // const apiUrl = process.env.REACT_APP_API_URL
 
-export const ProjectListScreen = (props:{setProjectOpen: (isOpen:boolean)=>void}) => {
+export const ProjectListScreen = (props:{
+    // setProjectOpen: (isOpen:boolean)=>void
+    projectButton:JSX.Element
+}) => {
     const [ param, setParam] = useState({
         name: '',
         personId: ''
@@ -34,7 +37,8 @@ export const ProjectListScreen = (props:{setProjectOpen: (isOpen:boolean)=>void}
     return  <Container>
         <Row>
         <h2>项目列表</h2>
-        <Button onClick={ () => props.setProjectOpen(true)}>创建项目</Button>
+        {/* <Button onClick={ () => props.setProjectOpen(true)}>创建项目</Button> */}
+        {props.projectButton}
         </Row>
         <SearchPanel users={users || []} param={param} setParam={setParam} />
         {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : ''}
@@ -43,7 +47,9 @@ export const ProjectListScreen = (props:{setProjectOpen: (isOpen:boolean)=>void}
         loading={isLoading}
         dataSource={list || []} 
         users={users || []} 
-        setProjectOpen={props.setProjectOpen} />
+        // setProjectOpen={props.setProjectOpen} 
+        projectButton={props.projectButton}
+        />
     </Container>
 }
 
