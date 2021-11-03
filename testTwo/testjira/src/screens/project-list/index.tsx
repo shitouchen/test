@@ -20,9 +20,8 @@ export const ProjectListScreen = () => {
   const debouncedParam = useDebounce(param, 2000);
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState<null | Error>(null);
-  const {isLoading, error, data:list} = useProjects(debouncedParam);
-  const {data: users} = useUsers();
-
+  const { isLoading, error, data: list } = useProjects(debouncedParam);
+  const { data: users } = useUsers();
 
   return (
     <Container>
